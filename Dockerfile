@@ -1,15 +1,15 @@
 FROM node:25-alpine AS build
 WORKDIR /app
-COPY package*.json ./
+COPY package*.json .
 RUN npm install
-COPY tsconfig.json ./
+COPY tsconfig.json .
 COPY src ./src
 RUN npm run build
 
 FROM node:25-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
-COPY package*.json ./
+COPY package*.json .
 RUN npm install
 COPY --from=build /app/dist ./dist
 EXPOSE 80
