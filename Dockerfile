@@ -10,7 +10,7 @@ FROM node:20-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install
 COPY --from=build /app/dist ./dist
 EXPOSE 80
 CMD ["node", "dist/server.ts"]
