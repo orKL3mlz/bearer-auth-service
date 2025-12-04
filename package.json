@@ -8,11 +8,10 @@
   "engines": {
     "node": ">=25"
   },
-  "main": "dist/server.ts",
+  "main": "src/server.ts",
   "scripts": {
     "prepare": "npm run build",
-    "dev": "ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules --no-notify src/server.ts",
-    "start": "node dist/server.ts",
+    "start": "node src/server.ts",
     "lint": "eslint . --ext .ts"
   },
   "dependencies": {
