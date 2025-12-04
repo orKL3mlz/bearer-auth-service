@@ -2,8 +2,8 @@ FROM node:25-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 COPY tsconfig.json ./
-RUN npm install
 COPY src ./src
+RUN npm install
 RUN npm run build
 
 FROM node:25-alpine AS runtime
