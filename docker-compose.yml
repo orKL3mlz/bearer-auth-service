@@ -1,0 +1,18 @@
+services:
+  bearer-auth-service:
+    build: .
+    image: bearer-auth-service:latest
+    container_name: bearer-auth-service
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/var/logs/bearer-auth-service
+    ports:
+      - "8080:${PORT}"
+    healthcheck:
+      test: ["CMD", "curl", "--silent", "--fail", "http://localhost:${PORT}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
