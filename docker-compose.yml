@@ -7,6 +7,6 @@ services:
     env_file:
       - .env
     volumes:
-      - ./logs:/var/logs/bearer-auth-service
+      - ./logs:/logs
     ports:
       - "8080:${PORT}"
