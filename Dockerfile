@@ -17,5 +17,6 @@ RUN npm ci --omit=dev
 
 COPY --from=builder /app/dist ./dist
 
-EXPOSE 80
+HEALTHCHECK --interval=1m --timeout=30s --retries=3 --start-period=20s CMD curl --silent --fail http://localhost:${PORT}/health || exit 1
+EXPOSE ${PORT}
 CMD ["node", "dist/app.js"]
