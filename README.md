@@ -7,6 +7,7 @@ A lightweight authentication service built with Node.js and Express. It validate
 > Code partially created with AI and checked by me.
 
 ## Features
+- Listen on port `80`
 - Bearer token validation using timing-safe comparison.
 - Tokens loaded from environment variables (`TOKEN_<NAME>`).
 - **JSON-based logging** for all events (startup, token usage, failures).
@@ -19,7 +20,6 @@ A lightweight authentication service built with Node.js and Express. It validate
 | Variable | Description | Mandatory | Default |
 |----------|-------------|-----------|---------|
 | `TOKEN_<NAME>` | Defines a valid token. Example: `TOKEN_BACKOFFICE=abc123`. | Yes | `None` |
-| `PORT` | Port to run the service. | No | `80` |
 | `APP_LOG_STDOUT_PATH` | Path for info/debug logs. | No | `stdout` |
 | `APP_LOG_STDERR_PATH` | Path for error logs. | No | `stderr` |
 | `TRUST_PROXY` | Configure Express trust proxy. | No | `True` |
@@ -55,17 +55,17 @@ Send `SIGUSR1` to the process to reopen log files after rotation.
 npm install
 
 # Run the service
-PORT=8080 TOKEN_BACKOFFICE=abc123 npm start
+TOKEN_BACKOFFICE=abc123 npm start
 ```
 
 ### Health Check
 ```bash
-curl http://localhost:8080/health
+curl http://localhost/health
 ```
 
 ### Auth Check
 ```bash
-curl -H "Authorization: Bearer abc123" http://localhost:8080/auth-check
+curl -H "Authorization: Bearer abc123" http://localhost/auth-check
 ```
 
 ## Example Logs
@@ -82,6 +82,3 @@ curl -H "Authorization: Bearer abc123" http://localhost:8080/auth-check
 ## Security Notes
 - Full token values are never logged; only the first 3 characters are shown.
 - Failure responses are generic (`401 Unauthorized`) to avoid leaking details.
-
-## License
-MIT

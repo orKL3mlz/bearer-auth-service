@@ -333,7 +333,7 @@ app.get('/auth-check', requireBearerToken, (_req, res) => {
 /**
  * Server startup
  */
-const port = Number(process.env.PORT || 80);
+const port = 80;
 app.listen(port, () => {
   jsonLog('service_listen', { port });
 });
