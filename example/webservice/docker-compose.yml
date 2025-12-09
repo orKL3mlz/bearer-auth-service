@@ -1,0 +1,25 @@
+# This is an example to show you how the labels should be configured
+# This docker-compose was not tested with it-tools
+
+services:
+  it-tools:
+      image: ghcr.io/corentinth/it-tools:latest
+      container_name: it-tools
+      restart: unless-stopped
+      networks:
+        - proxy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.services.it-tools.loadbalancer.server.port=80"
+        - "traefik.http.routers.it-tools.rule=Host(\"it-tools.local\")"
+
+        # Modification du routage des requêtes
+        - "traefik.http.routers.it-tools.middlewares=it-tools-auth@docker"
+
+        # Forward Authorization Bearer token
+        - "traefik.http.middlewares.it-tools-auth.forwardauth.address=http://bearer-auth-service/auth-check"
+        - "traefik.http.middlewares.it-tools-auth.forwardauth.authRequestHeaders = [\"Authorization\"]"
+
+networks:
+  proxy:
+    external: true

@@ -23,8 +23,8 @@ import { Console } from 'node:console';
  */
 
 // ENV names for log paths
-const LOG_OUT_ENV = process.env.APP_LOG_STDOUT_PATH; // e.g., /var/log/auth-service/out.log
-const LOG_ERR_ENV = process.env.APP_LOG_STDERR_PATH; // e.g., /var/log/auth-service/err.log
+const LOG_OUT_ENV = process.env.APP_LOG_STDOUT_PATH; // e.g., /logs/auth-service/access.log
+const LOG_ERR_ENV = process.env.APP_LOG_STDERR_PATH; // e.g., /logs/auth-service/error.log
 
 // Maintain current streams (can be process stdio or fs.WriteStream)
 let outStream: NodeJS.WritableStream = process.stdout;

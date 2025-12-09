@@ -1,0 +1,23 @@
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v3
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  ## A désactiver en production
+    volumes:
+      - /root/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - /root/traefik/logs:/etc/traefik/logs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - default
+      - bearer-auth-service
+      - proxy
+    restart: always
+
+networks:
+  proxy:
+    name: proxy
+  bearer-auth-service:
+    name: bearer-auth-service

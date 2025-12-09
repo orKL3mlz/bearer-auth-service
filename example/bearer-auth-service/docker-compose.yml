@@ -1,0 +1,16 @@
+services:
+  bearer-auth-service:
+    build: ../../
+    image: bearer-auth-service:latest
+    container_name: bearer-auth-service
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - /root/bearer-auth-service/logs:/logs
+    networks:
+      - bearer-auth-service
+
+networks:
+  bearer-auth-service:
+    external: true
